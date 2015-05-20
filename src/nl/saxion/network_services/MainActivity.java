@@ -5,6 +5,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.res.AssetManager;
 import android.os.Bundle;
@@ -22,7 +26,14 @@ public class MainActivity extends Activity {
 		
 		try {
 			JSONObject tweets = new JSONObject(readAssetIntoString("searchresult.json.txt"));
+			JSONArray statuses = tweets.getJSONArray("statuses");
+//			for( .. ) {
+//				JSONObject tweet = status.getObject(i);
+//				Tweet t = new Tweet(tweet);
+//			}
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 	}
