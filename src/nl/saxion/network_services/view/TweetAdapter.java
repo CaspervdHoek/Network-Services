@@ -38,6 +38,8 @@ public class TweetAdapter extends ArrayAdapter<Tweet> {
 		
 		Tweet tweet = getItem(position);
 		
+		tweetText.setText(tweet.getText());
+		
 		return convertView;
 	}
 

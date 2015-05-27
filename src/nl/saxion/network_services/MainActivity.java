@@ -4,9 +4,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+
+import nl.saxion.network_services.view.TweetAdapter;
 
 import org.json.JSONArray;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -15,6 +17,7 @@ import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 public class MainActivity extends Activity {
 	
@@ -26,10 +29,18 @@ public class MainActivity extends Activity {
 		try {
 			JSONObject tweets = new JSONObject(readAssetIntoString("searchresult.json.txt"));
 			JSONArray statuses = tweets.getJSONArray("statuses");
-//			for( .. ) {
-//				JSONObject tweet = status.getObject(i);
-//				Tweet t = new Tweet(tweet);
-//			}
+
+			Tweet tweet = new Tweet(tweets);
+			
+			ArrayList<Tweet> tweeters = new ArrayList<Tweet>();
+			tweeters.add(tweet);
+			
+			ListView list = (ListView) findViewById(R.id.listView1);
+			
+			TweetAdapter adapter = new TweetAdapter(this, R.layout.tweet, tweeters);
+			
+			list.setAdapter(adapter);
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (JSONException e) {
