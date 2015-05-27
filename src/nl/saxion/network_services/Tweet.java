@@ -29,8 +29,8 @@ public class Tweet {
 			
 			this.id = tweet.getString("id");
 			this.createdAt = tweet.getString("created_at");
-			this.favoriteCount = tweet.getInt("favourites_count");
-			this.favorited = tweet.getBoolean("favourited");
+			this.favoriteCount = tweet.getInt("favorite_count");
+			this.favorited = tweet.getBoolean("favorited");
 			this.inReplyToScreenName = tweet.getString("in_reply_to_screen_name");
 			this.inReplyToUserId = tweet.getString("in_reply_to_status_id");
 			this.retweetCount = tweet.getInt("retweet_count");
@@ -43,6 +43,10 @@ public class Tweet {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public String getText(){
+		return text;
 	}
 
 }
