@@ -24,15 +24,9 @@ public class Tweet {
 	public Tweet(JSONObject tweet){
 		
 		try {
-			//JSONArray statuses = obj.getJSONArray("statuses");
-			//JSONObject tweet = statuses.getJSONObject(0);
-			
+
 			this.id = tweet.getString("id");
 			this.createdAt = tweet.getString("created_at");
-
-			if( tweet.has("favorite_count"))
-				this.favoriteCount = tweet.getInt("favorite_count");
-			this.favorited = tweet.getBoolean("favourited");
 
 			this.favoriteCount = tweet.getInt("favorite_count");
 			this.favorited = tweet.getBoolean("favorited");

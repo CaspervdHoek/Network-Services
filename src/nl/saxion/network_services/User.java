@@ -21,6 +21,8 @@ public class User {
 	private Tweet status;
 	
 	public User(JSONObject obj){
+		
+		
 	
 	}
 }

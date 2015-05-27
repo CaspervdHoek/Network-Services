@@ -26,18 +26,21 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		ArrayList<Tweet> tweetArrayList = new ArrayList<Tweet>();
+		
 		try {
 			JSONObject tweets = new JSONObject(readAssetIntoString("searchresult.json.txt"));
 			JSONArray statuses = tweets.getJSONArray("statuses");
+			
+			for(int i = 0; i < statuses.length(); i++){
+				JSONObject tweet = statuses.getJSONObject(i);
+				Tweet newTweet = new Tweet(tweet);
+				tweetArrayList.add(newTweet);
+			}
 
-			Tweet tweet = new Tweet(tweets);
-			
-			ArrayList<Tweet> tweeters = new ArrayList<Tweet>();
-			tweeters.add(tweet);
-			
 			ListView list = (ListView) findViewById(R.id.listView1);
 			
-			TweetAdapter adapter = new TweetAdapter(this, R.layout.tweet, tweeters);
+			TweetAdapter adapter = new TweetAdapter(this, R.layout.tweet, tweetArrayList);
 			
 			list.setAdapter(adapter);
 			
