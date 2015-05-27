@@ -2,6 +2,8 @@ package nl.saxion.network_services;
 
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Tweet {
@@ -20,7 +22,27 @@ public class Tweet {
 	private Media media;
 	
 	public Tweet(JSONObject obj){
-		//this.text = obj.getString("text");
+		
+		try {
+			JSONArray statuses = obj.getJSONArray("statuses");
+			JSONObject tweet = statuses.getJSONObject(0);
+			
+			this.id = tweet.getString("id");
+			this.createdAt = tweet.getString("created_at");
+			this.favoriteCount = tweet.getInt("favourites_count");
+			this.favorited = tweet.getBoolean("favourited");
+			this.inReplyToScreenName = tweet.getString("in_reply_to_screen_name");
+			this.inReplyToUserId = tweet.getString("in_reply_to_status_id");
+			this.retweetCount = tweet.getInt("retweet_count");
+			this.retweeted = tweet.getBoolean("retweeted");
+			this.text = tweet.getString("text");
+		
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public Tweet(String id, User user, String createdAt, ArrayList<Entity> entities, int favoriteCount,

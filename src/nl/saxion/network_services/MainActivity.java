@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.res.AssetManager;
 import android.os.Bundle;
@@ -13,8 +16,6 @@ import android.view.MenuItem;
 
 public class MainActivity extends Activity {
 	
-	// hoi casper
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -23,6 +24,9 @@ public class MainActivity extends Activity {
 		try {
 			JSONObject tweets = new JSONObject(readAssetIntoString("searchresult.json.txt"));
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (JSONException e) {
+			
 			e.printStackTrace();
 		}
 	}
