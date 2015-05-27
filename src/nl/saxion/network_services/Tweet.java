@@ -21,15 +21,17 @@ public class Tweet {
 	private String text;
 	private Media media;
 	
-	public Tweet(JSONObject obj){
+	public Tweet(JSONObject tweet){
 		
 		try {
-			JSONArray statuses = obj.getJSONArray("statuses");
-			JSONObject tweet = statuses.getJSONObject(0);
+			//JSONArray statuses = obj.getJSONArray("statuses");
+			//JSONObject tweet = statuses.getJSONObject(0);
 			
 			this.id = tweet.getString("id");
 			this.createdAt = tweet.getString("created_at");
-			this.favoriteCount = tweet.getInt("favourites_count");
+
+			if( tweet.has("favorite_count"))
+				this.favoriteCount = tweet.getInt("favorite_count");
 			this.favorited = tweet.getBoolean("favourited");
 			this.inReplyToScreenName = tweet.getString("in_reply_to_screen_name");
 			this.inReplyToUserId = tweet.getString("in_reply_to_status_id");
