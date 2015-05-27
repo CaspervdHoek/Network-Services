@@ -32,7 +32,7 @@ public class TweetAdapter extends ArrayAdapter<Tweet> {
 		}
 		
 		TextView screenName = (TextView) convertView.findViewById(R.id.screenName);
-		TextView userName = (TextView) convertView.findViewById(R.id.userName);
+		TextView name = (TextView) convertView.findViewById(R.id.name);
 		TextView tweetText = (TextView) convertView.findViewById(R.id.tweetText);
 		ImageView foto = (ImageView) convertView.findViewById(R.id.foto);
 		
