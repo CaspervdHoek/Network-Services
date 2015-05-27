@@ -44,22 +44,5 @@ public class Tweet {
 		}
 		
 	}
-	
-	public Tweet(String id, User user, String createdAt, ArrayList<Entity> entities, int favoriteCount,
-			boolean favorited, String inReplyToScreenName, String inReplyToUserId, int retweetCount,
-			boolean retweeted, String text, Media media){
-		
-		this.id = id;
-		this.user = user;
-		this.createdAt = createdAt;
-		this.entities = entities;
-		this.favoriteCount = favoriteCount;
-		this.favorited = favorited;
-		this.inReplyToScreenName = inReplyToScreenName;
-		this.inReplyToUserId = inReplyToUserId;
-		this.retweetCount = retweetCount;
-		this.retweeted = retweeted;
-		this.text = text;
-		this.media = media;
-	}
+
 }
