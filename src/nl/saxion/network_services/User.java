@@ -3,6 +3,8 @@ package nl.saxion.network_services;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.net.Uri;
+
 public class User {
 
 	private String id;
@@ -31,13 +33,17 @@ public class User {
 			this.listedCount = user.getInt("listed_count");
 			this.location = user.getString("location");
 			this.name = user.getString("name");
-			this.profileBackgroundColor = user.getString("profile_background_color");
-			this.profileBackgroundImageURL = user.getString("profile_background_image_url");
-			this.profileBannerURL = user.getString("profile_banner_url");
-			this.profileImageURL = user.getString("profile_image_url");
+			this.screenName = user.getString("screen_name");
+			if(user.has("profile_background_color")){
+				this.profileBackgroundColor = user.getString("profile_background_color");
+			}
+//			this.profileBackgroundImageURL = user.getString("profile_background_image_url");
+//			this.profileBannerURL = user.getString("profile_banner_url");
+			if(user.has("profile_image_url")){
+				this.profileImageURL = user.getString("profile_image_url");
+			}
 			this.profileUseBackgroundImage = user.getBoolean("profile_use_background_image");
 			this.accountProtected = user.getBoolean("protected");
-			this.screenName = user.getString("screen_name");
 			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

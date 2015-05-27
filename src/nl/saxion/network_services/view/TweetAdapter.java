@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import nl.saxion.network_services.R;
 import nl.saxion.network_services.Tweet;
 import android.content.Context;
+import android.graphics.Color;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +28,6 @@ public class TweetAdapter extends ArrayAdapter<Tweet> {
 	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		Log.d("TweetAdapter", "GetView number " + position);
 		if(convertView == null){
 			convertView = inflater.inflate(resource, parent, false);
 		}
@@ -39,6 +40,12 @@ public class TweetAdapter extends ArrayAdapter<Tweet> {
 		Tweet tweet = getItem(position);
 		
 		tweetText.setText(tweet.getText());
+		name.setText(tweet.getUser().getName());
+		screenName.setText("@" + tweet.getUser().getScreenName());
+		screenName.setTextColor(Color.GRAY);
+		if (tweet.getUser().getProfileImageURL() != null){
+			foto.setImageURI(Uri.parse(tweet.getUser().getProfileImageURL()));
+		}
 		
 		return convertView;
 	}
