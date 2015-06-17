@@ -15,6 +15,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -47,8 +48,10 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				SearchTweetTask stt = new SearchTweetTask(list, adapter);
-				stt.execute(searchEditText.toString());
+				SearchTweetTask stt = new SearchTweetTask(MainActivity.this, list, adapter);
+				stt.execute(searchEditText.getText() + "");
+				Log.d("tekst", searchEditText.getText() + "");
+				
 			}
 		});		
 		

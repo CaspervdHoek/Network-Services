@@ -3,6 +3,7 @@ package nl.saxion.network_services;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import nl.saxion.network_services.view.TweetAdapter;
@@ -31,7 +32,8 @@ public class SearchTweetTask extends AsyncTask<String, Double, String> {
 	
 	private ListView list;
 	private TweetAdapter adapter;
-	ArrayList<Tweet> tweetArrayList = new ArrayList<Tweet>();
+	private ArrayList<Tweet> tweetArrayList = new ArrayList<Tweet>();
+	private MainActivity activity;
 
 	String authString = API_KEY + ":" + API_SECRET;
 	String base64 = Base64.encodeToString(authString.getBytes(), Base64.NO_WRAP);
@@ -41,9 +43,10 @@ public class SearchTweetTask extends AsyncTask<String, Double, String> {
 	
 	String token;
 	
-	public SearchTweetTask(ListView list, TweetAdapter adapter) {
+	public SearchTweetTask(MainActivity activity, ListView list, TweetAdapter adapter) {
 		this.list = list;
 		this.adapter = adapter;
+		this.activity = activity;
 	}
 
 	private void getBearerToken(){
@@ -80,12 +83,18 @@ public class SearchTweetTask extends AsyncTask<String, Double, String> {
 
 	@Override
 	protected String doInBackground(String... params) {
-		
 		if(token == null){
 			getBearerToken();
 		}
-		
-		HttpGet httpGet = new HttpGet("https://api.twitter.com/1.1/search/tweets.json?q=" + params);
+		String zoekwoord = null;
+		try {
+			zoekwoord = URLEncoder.encode(params[0], "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+				
+		HttpGet httpGet = new HttpGet("https://api.twitter.com/1.1/search/tweets.json?q=" + zoekwoord);
 		httpGet.setHeader("Authorization", "Bearer " + token);
 		String searchJSON = null;
 		try {
@@ -103,7 +112,6 @@ public class SearchTweetTask extends AsyncTask<String, Double, String> {
 
 	@Override
 	protected void onPostExecute(String result) {
-		super.onPostExecute(result);
 		
 		try {
 			JSONObject tweets = new JSONObject(result);
@@ -118,8 +126,11 @@ public class SearchTweetTask extends AsyncTask<String, Double, String> {
 			e.printStackTrace();
 		}
 		
+		adapter = new TweetAdapter(activity, R.layout.tweet, tweetArrayList);
 		list.setAdapter(adapter);
 		
+		super.onPostExecute(result);
 	}
+
 }
 					
