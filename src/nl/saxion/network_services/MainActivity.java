@@ -17,14 +17,33 @@ import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 public class MainActivity extends Activity {
+	
+	private ImageButton searchButton;
+	private EditText searchEditText;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		searchEditText = (EditText) findViewById(R.id.searchEditText);
+		searchButton = (ImageButton) findViewById(R.id.searchButton);
+		
+		searchButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				SearchTweetTask stt = new SearchTweetTask();
+				stt.execute(searchEditText.toString());
+				
+			}
+		});
 		
 		ArrayList<Tweet> tweetArrayList = new ArrayList<Tweet>();
 		
@@ -50,8 +69,6 @@ public class MainActivity extends Activity {
 			e.printStackTrace();
 		}
 		
-		SearchTweetTask stt = new SearchTweetTask();
-		stt.execute();
 	}
 
 	/**

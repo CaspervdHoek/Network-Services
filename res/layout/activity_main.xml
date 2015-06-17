@@ -15,14 +15,14 @@
         android:layout_height="wrap_content" >
 
         <EditText
-            android:id="@+id/editText1"
+            android:id="@+id/searchEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10" />
 
         <ImageButton
-            android:id="@+id/imageButton1"
+            android:id="@+id/searchButton"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="3"

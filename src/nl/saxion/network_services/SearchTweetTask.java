@@ -19,7 +19,7 @@ import android.os.AsyncTask;
 import android.util.Base64;
 import android.util.Log;
 
-public class SearchTweetTask extends AsyncTask {
+public class SearchTweetTask extends AsyncTask<String, Double, String> {
 	
 	private static final String API_KEY = "fmPbMIYHurHra0Np8qEhh9IS8";
 	private static final String API_SECRET = "8YcCA0V7dUwgzvsLWMTJfaX6xSMVdrREMjHKXEX0z6MBqz2j7e";
@@ -65,7 +65,7 @@ public class SearchTweetTask extends AsyncTask {
 	}
 
 	@Override
-	protected Object doInBackground(Object... params) {
+	protected String doInBackground(String... params) {
 		
 		if(token == null){
 			getBearerToken();
@@ -73,9 +73,9 @@ public class SearchTweetTask extends AsyncTask {
 		
 		HttpGet httpGet = new HttpGet("https://api.twitter.com/1.1/search/tweets.json?q=appelflap");
 		httpGet.setHeader("Authorization", "Bearer " + token);
-		
+		String searchJSON = null;
 		try {
-			String searchJSON = client.execute(httpGet, handler);
+			searchJSON = client.execute(httpGet, handler);
 			Log.d("result", searchJSON);
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
@@ -84,9 +84,9 @@ public class SearchTweetTask extends AsyncTask {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return searchJSON;
 	}
-	
+
 	
 
 }
