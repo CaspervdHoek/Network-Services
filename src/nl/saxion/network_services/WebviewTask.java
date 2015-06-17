@@ -1,0 +1,67 @@
+package nl.saxion.network_services;
+
+import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
+import oauth.signpost.commonshttp.CommonsHttpOAuthProvider;
+import oauth.signpost.exception.OAuthCommunicationException;
+import oauth.signpost.exception.OAuthExpectationFailedException;
+import oauth.signpost.exception.OAuthMessageSignerException;
+import oauth.signpost.exception.OAuthNotAuthorizedException;
+import android.os.AsyncTask;
+import android.util.Log;
+import android.webkit.WebView;
+
+public class WebviewTask extends AsyncTask<String, Void, String> {
+
+	private static final String OAUTH_REQUEST_URL = "https://api.twitter.com/oauth/request_token";
+	private static final String OAUTH_ACCESSTOKEN_URL = "https://api.twitter.com/oauth/access_token";
+	private static final String OAUT_AUTHORIZE_URL = "https://api.twitter.com/oauth/authorize";
+	private static final String CONSUMER_KEY = "fmPbMIYHurHra0Np8qEhh9IS8";
+	private static final String CONSUMER_SECRET = "8YcCA0V7dUwgzvsLWMTJfaX6xSMVdrREMjHKXEX0z6MBqz2j7e";
+	private static final String OAUTH_CALLBACK_URL = "http://9gag.com";
+	private WebView webview;
+	
+	
+	public WebviewTask(WebView webview){
+		this.webview = webview;
+	}
+	
+	
+	@Override
+	protected String doInBackground(String... params) {
+		CommonsHttpOAuthProvider provider = new CommonsHttpOAuthProvider(OAUTH_REQUEST_URL, OAUTH_ACCESSTOKEN_URL, OAUT_AUTHORIZE_URL);
+		CommonsHttpOAuthConsumer consumer = new CommonsHttpOAuthConsumer(CONSUMER_KEY, CONSUMER_SECRET);
+		String url = null;
+		
+		try {
+			url = provider.retrieveRequestToken(consumer, OAUTH_CALLBACK_URL);
+			Log.d("url", url);
+		} catch (OAuthMessageSignerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (OAuthNotAuthorizedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (OAuthExpectationFailedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (OAuthCommunicationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return url;
+	}
+
+
+	@Override
+	protected void onPostExecute(String result) {
+		super.onPostExecute(result);
+		
+		webview.loadUrl(result);
+		
+		
+		
+	}
+
+}
