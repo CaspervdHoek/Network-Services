@@ -49,6 +49,9 @@ public class MainActivity extends Activity {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+		
+		SearchTweetTask stt = new SearchTweetTask();
+		stt.execute();
 	}
 
 	/**
