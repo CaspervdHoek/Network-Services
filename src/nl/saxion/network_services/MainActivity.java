@@ -26,12 +26,20 @@ public class MainActivity extends Activity {
 	
 	private ImageButton searchButton;
 	private EditText searchEditText;
+	private ListView list;
+	private TweetAdapter adapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		list = (ListView) findViewById(R.id.listView1);
+		
+		ArrayList<Tweet> tweetArrayList = new ArrayList<Tweet>();
+		adapter = new TweetAdapter(this, R.layout.tweet, tweetArrayList);
+		
+		list.setAdapter(adapter);
 		searchEditText = (EditText) findViewById(R.id.searchEditText);
 		searchButton = (ImageButton) findViewById(R.id.searchButton);
 		
@@ -39,13 +47,10 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				SearchTweetTask stt = new SearchTweetTask();
+				SearchTweetTask stt = new SearchTweetTask(list, adapter);
 				stt.execute(searchEditText.toString());
-				
 			}
-		});
-		
-		ArrayList<Tweet> tweetArrayList = new ArrayList<Tweet>();
+		});		
 		
 		try {
 			JSONObject tweets = new JSONObject(readAssetIntoString("searchresult.json.txt"));
@@ -57,11 +62,6 @@ public class MainActivity extends Activity {
 				tweetArrayList.add(newTweet);
 			}
 
-			ListView list = (ListView) findViewById(R.id.listView1);
-			
-			TweetAdapter adapter = new TweetAdapter(this, R.layout.tweet, tweetArrayList);
-			
-			list.setAdapter(adapter);
 			
 		} catch (IOException e) {
 			e.printStackTrace();
