@@ -9,6 +9,7 @@ import oauth.signpost.exception.OAuthNotAuthorizedException;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 public class WebviewTask extends AsyncTask<String, Void, String> {
 
@@ -58,11 +59,21 @@ public class WebviewTask extends AsyncTask<String, Void, String> {
 	@Override
 	protected void onPostExecute(String result) {
 		super.onPostExecute(result);
+				
+		webview.setWebViewClient(new WebViewClient() {
+			
+			public boolean shoulderOverrideUrlLoading(WebView view, String url){
+				if (url.startsWith("http://9gag.com")){
+					Log.d("override", "succes");
+					return true;
+					// succes!
+				}
+				return false;
+			}
+		});
 		
 		webview.loadUrl(result);
-		
-		
-		
+
 	}
 
 }
