@@ -35,7 +35,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		list = (ListView) findViewById(R.id.listView1);
+		list = (ListView) findViewById(R.id.listViewTweets);
 		
 		ArrayList<Tweet> tweetArrayList = new ArrayList<Tweet>();
 		adapter = new TweetAdapter(this, R.layout.tweet, tweetArrayList);

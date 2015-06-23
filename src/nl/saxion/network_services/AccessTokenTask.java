@@ -8,34 +8,26 @@ import oauth.signpost.exception.OAuthMessageSignerException;
 import oauth.signpost.exception.OAuthNotAuthorizedException;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.webkit.WebView;
 
-public class WebviewTask extends AsyncTask<String, Void, String> {
+public class AccessTokenTask extends AsyncTask<String, Void, String> {
 
-	private static final String OAUTH_REQUEST_URL = "https://api.twitter.com/oauth/request_token";
-	private static final String OAUTH_ACCESSTOKEN_URL = "https://api.twitter.com/oauth/access_token";
-	private static final String OAUT_AUTHORIZE_URL = "https://api.twitter.com/oauth/authorize";
-	private static final String CONSUMER_KEY = "fmPbMIYHurHra0Np8qEhh9IS8";
-	private static final String CONSUMER_SECRET = "8YcCA0V7dUwgzvsLWMTJfaX6xSMVdrREMjHKXEX0z6MBqz2j7e";
-	private static final String OAUTH_CALLBACK_URL = "http://9gag.com";
+	private Model model;
 	private CommonsHttpOAuthProvider provider;
 	private CommonsHttpOAuthConsumer consumer;
-	private WebView webview;
-	private Model model;
+	private MyApplication app;
 	
-	public WebviewTask(WebView webview, Model model){
-		this.webview = webview;
+	public AccessTokenTask(Model model){
 		this.model = model;
 		provider = model.getProvider();
 		consumer = model.getConsumer();
 	}
 	
+	
 	@Override
 	protected String doInBackground(String... params) {
-		String url = null;
 		try {
-			url = provider.retrieveRequestToken(consumer, OAUTH_CALLBACK_URL);
-			Log.d("p url", url);
+			provider.retrieveAccessToken(consumer, params[0]);
+			Log.d("token", consumer.getToken());
 		} catch (OAuthMessageSignerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -51,16 +43,13 @@ public class WebviewTask extends AsyncTask<String, Void, String> {
 		}
 		
 		
-		return url;
+		
+		return null;
 	}
-
-
+	
 	@Override
 	protected void onPostExecute(String result) {
 		super.onPostExecute(result);
-		
-		webview.loadUrl(result);
-		
 		
 		
 	}
