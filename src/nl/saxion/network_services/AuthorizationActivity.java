@@ -2,6 +2,7 @@ package nl.saxion.network_services;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -22,7 +23,8 @@ public class AuthorizationActivity extends Activity {
 		webview.setWebViewClient(new WebViewClient() {
 			
 			public boolean shoulderOverrideUrlLoading(WebView view, String url){
-				if (url.startsWith("http://9gag.com")){
+				if (url.startsWith("http://www.9gag.com")){
+					Log.d("override", "succes");
 					return true;
 					// succes!
 				}
