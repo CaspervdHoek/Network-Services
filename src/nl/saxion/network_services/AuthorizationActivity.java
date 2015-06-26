@@ -30,7 +30,6 @@ public class AuthorizationActivity extends Activity {
 		final Intent i = new Intent(this, ProfileActivity.class);
 
 		webview.setWebViewClient(new WebViewClient() {
-<<<<<<< HEAD
 
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -38,17 +37,12 @@ public class AuthorizationActivity extends Activity {
 					String[] splitUrl = url.split("oauth_verifier=");
 					att.execute(splitUrl[1]);
 					startActivity(i);
-=======
-			
-			public boolean shoulderOverrideUrlLoading(WebView view, String url){
-				if (url.startsWith("http://www.9gag.com")){
-					Log.d("override", "succes");
->>>>>>> origin/master
 					return true;
+			
 				}
 				return false;
 			}
 		});
-		}
 
+	}
 }
