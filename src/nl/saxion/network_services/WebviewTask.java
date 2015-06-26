@@ -60,18 +60,6 @@ public class WebviewTask extends AsyncTask<String, Void, String> {
 	protected void onPostExecute(String result) {
 		super.onPostExecute(result);
 				
-		webview.setWebViewClient(new WebViewClient() {
-			
-			public boolean shoulderOverrideUrlLoading(WebView view, String url){
-				if (url.startsWith("http://9gag.com")){
-					Log.d("override", "succes");
-					return true;
-					// succes!
-				}
-				return false;
-			}
-		});
-		
 		webview.loadUrl(result);
 
 	}

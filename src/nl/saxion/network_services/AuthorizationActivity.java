@@ -33,9 +33,13 @@ public class AuthorizationActivity extends Activity {
 
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
+				Log.d("Override", url);
 				if (url.startsWith("http://9gag.com")) {
+					Log.d("Override", "voor split");
 					String[] splitUrl = url.split("oauth_verifier=");
+					Log.d("Override", "voor execute");
 					att.execute(splitUrl[1]);
+					Log.d("Override", "voor startactivity");
 					startActivity(i);
 					return true;
 			

@@ -39,8 +39,8 @@ public class ProfileActivity extends Activity {
 		userName.setTextColor(Color.GRAY);
 		userName.setText("@Casper_vdHoek");
 		
-		HomeTimelineTask htt = new HomeTimelineTask(model, this, listViewTweets, adapter);
-		htt.execute();
+		UserTimelineTask utt = new UserTimelineTask(model, this, listViewTweets, adapter);
+		utt.execute();
 		
 	}
 	

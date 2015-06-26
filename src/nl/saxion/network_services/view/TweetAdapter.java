@@ -2,6 +2,7 @@ package nl.saxion.network_services.view;
 
 import java.util.ArrayList;
 
+import nl.saxion.network_services.ProfilePhotoTask;
 import nl.saxion.network_services.R;
 import nl.saxion.network_services.Tweet;
 import android.content.Context;
@@ -38,13 +39,14 @@ public class TweetAdapter extends ArrayAdapter<Tweet> {
 		ImageView foto = (ImageView) convertView.findViewById(R.id.foto);
 		
 		Tweet tweet = getItem(position);
-		
+		ProfilePhotoTask ppt = new ProfilePhotoTask(foto);
+				
 		tweetText.setText(tweet.getText());
 		name.setText(tweet.getUser().getName());
 		screenName.setText("@" + tweet.getUser().getScreenName());
 		screenName.setTextColor(Color.GRAY);
 		if (tweet.getUser().getProfileImageURL() != null){
-			foto.setImageURI(Uri.parse(tweet.getUser().getProfileImageURL()));
+			ppt.execute(tweet.getUser().getProfileImageURL());
 		}
 		
 		return convertView;
