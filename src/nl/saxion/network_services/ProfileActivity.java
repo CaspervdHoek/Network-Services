@@ -14,6 +14,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,6 +26,7 @@ public class ProfileActivity extends Activity {
 	private MyApplication app;
 	private Model model;
 	private TweetAdapter adapter;
+	private ImageView profilePhoto;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,7 @@ public class ProfileActivity extends Activity {
 		followers = (TextView) findViewById(R.id.followers);
 		tweetCount = (TextView) findViewById(R.id.tweetCount);		
 		userName.setTextColor(Color.GRAY);
-		userName.setText("@Casper_vdHoek");
+		profilePhoto = (ImageView) findViewById(R.id.pfImageView);
 		
 		homeButton.setOnClickListener(new View.OnClickListener() {
 			
@@ -55,6 +57,18 @@ public class ProfileActivity extends Activity {
 		
 		UserTimelineTask utt = new UserTimelineTask(model, this, listViewTweets, adapter);
 		utt.execute();
+		
+	}
+	
+	public void setProfileInfo(String realName, String userName, String followers, String following, String tweetCount, String URL ){
+		this.realName.setText(realName);
+		this.userName.setText("@" + userName);
+		this.followers.setText(followers + " followers");
+		this.following.setText(following + " following");
+		this.tweetCount.setText(tweetCount + " tweets");
+		
+		ProfilePhotoTask ppt = new ProfilePhotoTask(profilePhoto);
+		ppt.execute(URL);
 		
 	}
 	

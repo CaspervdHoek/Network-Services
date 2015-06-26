@@ -10,6 +10,7 @@ public class User {
 	private String id;
 	private String description;
 	private int followersCount;
+	private int tweetCount;
 	private int friendsCount;
 	private int listedCount;
 	private String location;
@@ -34,11 +35,10 @@ public class User {
 			this.location = user.getString("location");
 			this.name = user.getString("name");
 			this.screenName = user.getString("screen_name");
+			this.tweetCount = user.getInt("statuses_count");
 			if(user.has("profile_background_color")){
 				this.profileBackgroundColor = user.getString("profile_background_color");
 			}
-//			this.profileBackgroundImageURL = user.getString("profile_background_image_url");
-//			this.profileBannerURL = user.getString("profile_banner_url");
 			if(user.has("profile_image_url")){
 				this.profileImageURL = user.getString("profile_image_url");
 			}
@@ -61,5 +61,17 @@ public class User {
 	
 	public String getProfileImageURL(){
 		return profileImageURL;
+	}
+	
+	public String getFollowers(){
+		return followersCount + "";
+	}
+	
+	public String getFriendsCount(){
+		return friendsCount + "";
+	}
+	
+	public String getTweetCount(){
+		return tweetCount + "";
 	}
 }

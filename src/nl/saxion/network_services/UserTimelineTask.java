@@ -75,9 +75,15 @@ public class UserTimelineTask extends AsyncTask<String, Void, String> {
 	
 	@Override
 	protected void onPostExecute(String result) {
-		
+				
 		try {
 			JSONArray tweets = new JSONArray(result);
+			JSONObject userTweetJSON = tweets.getJSONObject(0);
+			Tweet userTweet = new Tweet(userTweetJSON);
+			
+			activity.setProfileInfo(userTweet.getUser().getName(), userTweet.getUser().getScreenName()
+					, userTweet.getUser().getFollowers(), userTweet.getUser().getFriendsCount(), userTweet.getUser().getTweetCount(), userTweet.getUser().getProfileImageURL());
+
 			
 			for(int i = 0; i < tweets.length(); i++){
 				JSONObject tweet = tweets.getJSONObject(i);
@@ -87,6 +93,7 @@ public class UserTimelineTask extends AsyncTask<String, Void, String> {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+		
 		
 		adapter = new TweetAdapter(activity, R.layout.tweet, tweetArrayList);
 		list.setAdapter(adapter);
