@@ -13,12 +13,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -26,14 +28,20 @@ import android.widget.ListView;
 public class MainActivity extends Activity {
 	
 	private ImageButton searchButton;
+	private Button profileButton;
 	private EditText searchEditText;
 	private ListView list;
 	private TweetAdapter adapter;
+	private MyApplication app;
+	private Model model;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		app = (MyApplication) getBaseContext().getApplicationContext();
+		model = app.getModel();
 		
 		list = (ListView) findViewById(R.id.listViewTweets);
 		
@@ -43,6 +51,7 @@ public class MainActivity extends Activity {
 		list.setAdapter(adapter);
 		searchEditText = (EditText) findViewById(R.id.searchEditText);
 		searchButton = (ImageButton) findViewById(R.id.searchButton);
+		profileButton = (Button) findViewById(R.id.profileButton);
 		
 		searchButton.setOnClickListener(new View.OnClickListener() {
 			
@@ -53,26 +62,39 @@ public class MainActivity extends Activity {
 				Log.d("tekst", searchEditText.getText() + "");
 				
 			}
-		});		
+		});
 		
-		try {
-			JSONObject tweets = new JSONObject(readAssetIntoString("searchresult.json.txt"));
-			JSONArray statuses = tweets.getJSONArray("statuses");
+		profileButton.setOnClickListener(new View.OnClickListener() {
 			
-			for(int i = 0; i < statuses.length(); i++){
-				JSONObject tweet = statuses.getJSONObject(i);
-				Tweet newTweet = new Tweet(tweet);
-				tweetArrayList.add(newTweet);
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(MainActivity.this, ProfileActivity.class);
+				startActivity(i);
 			}
-
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+		});
+		
+		HomeTimelineTask htt = new HomeTimelineTask(model, this, list, adapter);
+		htt.execute();
+		
+//		try {
+//			JSONObject tweets = new JSONObject(readAssetIntoString("searchresult.json.txt"));
+//			JSONArray statuses = tweets.getJSONArray("statuses");
+//			
+//			for(int i = 0; i < statuses.length(); i++){
+//				JSONObject tweet = statuses.getJSONObject(i);
+//				Tweet newTweet = new Tweet(tweet);
+//				tweetArrayList.add(newTweet);
+//			}
+//
+//			
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} catch (JSONException e) {
+//			e.printStackTrace();
+//		}
 		
 	}
+
 
 	/**
      * Reads an asset file and returns a string with the full contents.

@@ -30,11 +30,11 @@ public class HomeTimelineTask extends AsyncTask<String, Void, String> {
 	private CommonsHttpOAuthProvider provider;
 	private CommonsHttpOAuthConsumer consumer;
 	private ArrayList<Tweet> tweetArrayList = new ArrayList<Tweet>();
-	private ProfileActivity activity;
+	private MainActivity activity;
 	private ListView list;
 	private TweetAdapter adapter;
 	
-	public HomeTimelineTask(Model model, ProfileActivity activity, ListView list, TweetAdapter adapter){
+	public HomeTimelineTask(Model model, MainActivity activity, ListView list, TweetAdapter adapter){
 		this.model = model;
 		provider = model.getProvider();
 		consumer = model.getConsumer();
