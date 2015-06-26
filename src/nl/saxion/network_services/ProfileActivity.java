@@ -14,6 +14,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -22,7 +23,8 @@ public class ProfileActivity extends Activity {
 	
 	private ListView listViewTweets;
 	private TextView realName, userName, following, followers, tweetCount;
-	private Button homeButton;
+	private Button homeButton, tweetButton;
+	private EditText editTextTweet;
 	private MyApplication app;
 	private Model model;
 	private TweetAdapter adapter;
@@ -37,6 +39,8 @@ public class ProfileActivity extends Activity {
 		model = app.getModel();
 		
 		homeButton = (Button) findViewById(R.id.homeButton);
+		tweetButton = (Button) findViewById(R.id.tweetButton);
+		editTextTweet = (EditText) findViewById(R.id.editTextTweet);
 		listViewTweets = (ListView) findViewById(R.id.listViewTweets);
 		realName = (TextView) findViewById(R.id.realName);
 		userName = (TextView) findViewById(R.id.userName);
@@ -45,6 +49,15 @@ public class ProfileActivity extends Activity {
 		tweetCount = (TextView) findViewById(R.id.tweetCount);		
 		userName.setTextColor(Color.GRAY);
 		profilePhoto = (ImageView) findViewById(R.id.pfImageView);
+		
+		tweetButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// Tweet hier iets met de text van editTextTweet.getText();
+				
+			}
+		});
 		
 		homeButton.setOnClickListener(new View.OnClickListener() {
 			
