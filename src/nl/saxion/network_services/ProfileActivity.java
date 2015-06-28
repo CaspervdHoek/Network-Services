@@ -55,9 +55,7 @@ public class ProfileActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				updateTweet(editTextTweet.getText().toString());
-				editTextTweet.setText("");
-				// Tweet hier iets met de text van editTextTweet.getText();
-				
+				editTextTweet.setText("");			
 			}
 		});
 		

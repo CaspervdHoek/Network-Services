@@ -46,7 +46,6 @@ public class User {
 			this.accountProtected = user.getBoolean("protected");
 			
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

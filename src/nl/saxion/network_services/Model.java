@@ -3,7 +3,11 @@ package nl.saxion.network_services;
 import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
 import oauth.signpost.commonshttp.CommonsHttpOAuthProvider;
 import android.webkit.WebView;
-
+/**
+ * class die dingen bijhoud die universeel bereikbaar moeten zijn
+ * @author Viradj
+ *
+ */
 public class Model {
 	
 	private static final String OAUTH_REQUEST_URL = "https://api.twitter.com/oauth/request_token";

@@ -37,8 +37,9 @@ public class UpdateTweetTask extends AsyncTask<String, Void, String> {
 		this.consumer = model.getConsumer();
 	}
 	
-	
-
+	/**
+	 * Signed de post request en probeert een tweet te plaatsen. Mislukt als dezelfde tweet hiervoor al geplaatst is.
+	 */
 	@Override
 	protected String doInBackground(String... params) {
 		
@@ -47,7 +48,6 @@ public class UpdateTweetTask extends AsyncTask<String, Void, String> {
 		try {
 			encodedTweet = URLEncoder.encode(params[0], "UTF-8");
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -59,19 +59,14 @@ public class UpdateTweetTask extends AsyncTask<String, Void, String> {
 			consumer.sign(request);
 			result = client.execute(request, handler);
 		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (OAuthMessageSignerException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (OAuthExpectationFailedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (OAuthCommunicationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

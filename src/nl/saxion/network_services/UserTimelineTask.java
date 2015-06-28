@@ -42,7 +42,9 @@ public class UserTimelineTask extends AsyncTask<String, Void, String> {
 		this.adapter = adapter;
 	}
 
-
+	/**
+	 * Haalt de tijlijn van de ingelogde gebruiker op
+	 */
 	@Override
 	protected String doInBackground(String... params) {
 		HttpClient client = new DefaultHttpClient();
@@ -54,19 +56,14 @@ public class UserTimelineTask extends AsyncTask<String, Void, String> {
 			consumer.sign(get);
 			json = client.execute(get, handler);
 		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (OAuthMessageSignerException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (OAuthExpectationFailedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (OAuthCommunicationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		Log.d("json", json);

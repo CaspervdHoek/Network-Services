@@ -49,6 +49,9 @@ public class SearchTweetTask extends AsyncTask<String, Double, String> {
 		this.activity = activity;
 	}
 
+	/**
+	 * Haalt een bearer token op
+	 */
 	private void getBearerToken(){
 		
 		HttpPost request = new HttpPost("https://api.twitter.com/oauth2/token");
@@ -66,21 +69,20 @@ public class SearchTweetTask extends AsyncTask<String, Double, String> {
 			token = response.getString("access_token");
 			Log.d("test getToken", token);
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
 
+	/**
+	 * Haalt JSON file op met gezochte tweets
+	 */
 	@Override
 	protected String doInBackground(String... params) {
 		if(token == null){
@@ -90,7 +92,6 @@ public class SearchTweetTask extends AsyncTask<String, Double, String> {
 		try {
 			zoekwoord = URLEncoder.encode(params[0], "UTF-8");
 		} catch (UnsupportedEncodingException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 				
@@ -101,15 +102,16 @@ public class SearchTweetTask extends AsyncTask<String, Double, String> {
 			searchJSON = client.execute(httpGet, handler);
 			Log.d("result", searchJSON);
 		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return searchJSON;
 	}
 
+	/**
+	 * Maakt Tweet objecten van JSON file en zet deze in een ArrayList
+	 */
 	@Override
 	protected void onPostExecute(String result) {
 		

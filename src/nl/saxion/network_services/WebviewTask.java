@@ -38,16 +38,12 @@ public class WebviewTask extends AsyncTask<String, Void, String> {
 			url = provider.retrieveRequestToken(consumer, OAUTH_CALLBACK_URL);
 			Log.d("p url", url);
 		} catch (OAuthMessageSignerException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (OAuthNotAuthorizedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (OAuthExpectationFailedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (OAuthCommunicationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

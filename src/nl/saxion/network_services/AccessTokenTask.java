@@ -9,6 +9,11 @@ import oauth.signpost.exception.OAuthNotAuthorizedException;
 import android.os.AsyncTask;
 import android.util.Log;
 
+/**
+ * Class haalt accesstoken op nadat er een verifier token is opgehaald
+ * @author Viradj
+ *
+ */
 public class AccessTokenTask extends AsyncTask<String, Void, String> {
 
 	private Model model;
@@ -22,28 +27,24 @@ public class AccessTokenTask extends AsyncTask<String, Void, String> {
 		consumer = model.getConsumer();
 	}
 	
-	
+	/**
+	 * De provider haalt met de verifier token die wordt meegegeven de accestoken op
+	 */
 	@Override
 	protected String doInBackground(String... params) {
 		try {
 			provider.retrieveAccessToken(consumer, params[0]);
 			Log.d("token", consumer.getToken());
 		} catch (OAuthMessageSignerException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (OAuthNotAuthorizedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (OAuthExpectationFailedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (OAuthCommunicationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
+				
 		return null;
 	}
 	

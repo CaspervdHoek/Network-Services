@@ -43,6 +43,9 @@ public class HomeTimelineTask extends AsyncTask<String, Void, String> {
 		this.adapter = adapter;
 	}
 
+	/**
+	 * Signed de request voor het ophalen, met de accesstoken, van de hometimeline en voert deze vervolgens uit
+	 */
 	@Override
 	protected String doInBackground(String... params) {
 		HttpClient client = new DefaultHttpClient();
@@ -54,25 +57,23 @@ public class HomeTimelineTask extends AsyncTask<String, Void, String> {
 			consumer.sign(get);
 			json = client.execute(get, handler);
 		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (OAuthMessageSignerException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (OAuthExpectationFailedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (OAuthCommunicationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		Log.d("json", json);
 		return json;
 	}
 	
+	/**
+	 * Maakt een lijst met Tweet objecten die in een ListView weergeven kunnen worden
+	 */
 	@Override
 	protected void onPostExecute(String result) {
 		

@@ -15,6 +15,9 @@ public class ProfilePhotoTask extends AsyncTask<String, Void, Bitmap> {
 		this.bitmapImage = imageview;
 	}
 	
+	/**
+	 * geeft een Bitmap terug van een afbeelding op de meegegeven URL
+	 */
 	@Override
 	protected Bitmap doInBackground(String... params) {
 		String url = params[0];

@@ -31,6 +31,9 @@ public class AuthorizationActivity extends Activity {
 
 		webview.setWebViewClient(new WebViewClient() {
 
+			/**
+			 * Vangt op of de callback URL geladen wordt en stopt het laden zodra dit zo is
+			 */
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
 				Log.d("Override", url);
