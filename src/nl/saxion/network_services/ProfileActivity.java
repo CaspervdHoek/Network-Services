@@ -54,6 +54,8 @@ public class ProfileActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
+				updateTweet(editTextTweet.getText().toString());
+				editTextTweet.setText("");
 				// Tweet hier iets met de text van editTextTweet.getText();
 				
 			}
@@ -70,6 +72,13 @@ public class ProfileActivity extends Activity {
 		
 		UserTimelineTask utt = new UserTimelineTask(model, this, listViewTweets, adapter);
 		utt.execute();
+		
+	}
+	
+	public void updateTweet(String tweet){
+		UpdateTweetTask update = new UpdateTweetTask(model, this);
+		
+		update.execute(tweet);
 		
 	}
 	
