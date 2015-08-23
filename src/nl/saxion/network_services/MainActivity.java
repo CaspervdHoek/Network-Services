@@ -76,6 +76,7 @@ public class MainActivity extends Activity {
 		HomeTimelineTask htt = new HomeTimelineTask(model, this, list, adapter);
 		htt.execute();
 		
+		
 		// Code voor mijlpaal 1, voor het inlezen van een JSON bestand
 //		try {
 //			JSONObject tweets = new JSONObject(readAssetIntoString("searchresult.json.txt"));
@@ -94,6 +95,10 @@ public class MainActivity extends Activity {
 //			e.printStackTrace();
 //		}
 		
+	}
+	
+	public Model getModel(){
+		return model;
 	}
 
 

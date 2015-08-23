@@ -1,5 +1,4 @@
 package nl.saxion.network_services;
-
 import java.io.IOException;
 
 import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
@@ -17,7 +16,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.os.AsyncTask;
 
-public class RetweetTask extends AsyncTask<String, Double, String> {
+
+public class FavoriteTask extends AsyncTask<String, Double, String> {
 	
 	private Model model;
 	private CommonsHttpOAuthProvider provider;
@@ -27,7 +27,7 @@ public class RetweetTask extends AsyncTask<String, Double, String> {
 	HttpClient client = new DefaultHttpClient();
 	ResponseHandler<String> handler = new BasicResponseHandler();
 	
-	public RetweetTask(Model model){
+	public FavoriteTask(Model model){
 		this.model = model;
 		this.provider = model.getProvider();
 		this.consumer = model.getConsumer();
@@ -36,7 +36,7 @@ public class RetweetTask extends AsyncTask<String, Double, String> {
 	@Override
 	protected String doInBackground(String... params) {
 		
-		HttpPost request = new HttpPost("https://api.twitter.com/1.1/statuses/retweet/" + params[0] + ".json");
+		HttpPost request = new HttpPost("https://api.twitter.com/1.1/favorites/create.json?id=" + params[0]);
 		String result = null;
 		
 		try {
@@ -59,7 +59,8 @@ public class RetweetTask extends AsyncTask<String, Double, String> {
 			e.printStackTrace();
 		}
 		
-		return null;
+		return result;
 	}
+	
 
 }

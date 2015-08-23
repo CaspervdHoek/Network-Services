@@ -111,6 +111,10 @@ public class ProfileActivity extends Activity {
 		
 	}
 	
+	public Model getModel(){
+		return model;
+	}
+	
 	
 
 }
