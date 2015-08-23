@@ -44,6 +44,10 @@ public class Tweet {
 		
 	}
 	
+	public String getID(){
+		return id;
+	}
+	
 	public User getUser(){
 		return user;
 	}

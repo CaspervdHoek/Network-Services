@@ -2,8 +2,11 @@ package nl.saxion.network_services.view;
 
 import java.util.ArrayList;
 
+import nl.saxion.network_services.Model;
+import nl.saxion.network_services.MyApplication;
 import nl.saxion.network_services.ProfilePhotoTask;
 import nl.saxion.network_services.R;
+import nl.saxion.network_services.RetweetTask;
 import nl.saxion.network_services.Tweet;
 import android.content.Context;
 import android.graphics.Color;
@@ -21,11 +24,14 @@ public class TweetAdapter extends ArrayAdapter<Tweet> {
 	
 	private LayoutInflater inflater;
 	private int resource;
+	private MyApplication app;
+	private Model model;
+	
 
 	public TweetAdapter(Context context, int resource, ArrayList<Tweet> objects) {
 		super(context, resource, objects);
 		inflater = LayoutInflater.from(context);
-		this.resource = resource;		
+		this.resource = resource;
 	}
 	
 	@Override
@@ -43,6 +49,7 @@ public class TweetAdapter extends ArrayAdapter<Tweet> {
 		
 		Tweet tweet = getItem(position);
 		ProfilePhotoTask ppt = new ProfilePhotoTask(foto);
+		String tweetID = tweet.getID();
 				
 		tweetText.setText(tweet.getText());
 		name.setText(tweet.getUser().getName());
@@ -56,7 +63,7 @@ public class TweetAdapter extends ArrayAdapter<Tweet> {
 			
 			@Override
 			public void onClick(View v) {
-				//TODO: Retweeten!
+				RetweetTask rt = new RetweetTask();
 				Log.d("Retweet", "nice");
 			}
 		});
