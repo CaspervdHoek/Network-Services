@@ -43,7 +43,7 @@ public class ProfileActivity extends Activity {
 		homeButton = (Button) findViewById(R.id.homeButton);
 		tweetButton = (Button) findViewById(R.id.tweetButton);
 		//
-		testButton = (Button) findViewById(R.id.button1);
+		testButton = (Button) findViewById(R.id.retweetButton);
 		//
 		editTextTweet = (EditText) findViewById(R.id.editTextTweet);
 		listViewTweets = (ListView) findViewById(R.id.listViewTweets);

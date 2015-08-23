@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,6 +38,8 @@ public class TweetAdapter extends ArrayAdapter<Tweet> {
 		TextView name = (TextView) convertView.findViewById(R.id.realName);
 		TextView tweetText = (TextView) convertView.findViewById(R.id.tweetText);
 		ImageView foto = (ImageView) convertView.findViewById(R.id.foto);
+		Button retweetButton = (Button) convertView.findViewById(R.id.retweetButton);
+		Button favoriteButton = (Button) convertView.findViewById(R.id.favoriteButton);
 		
 		Tweet tweet = getItem(position);
 		ProfilePhotoTask ppt = new ProfilePhotoTask(foto);
@@ -48,6 +51,24 @@ public class TweetAdapter extends ArrayAdapter<Tweet> {
 		if (tweet.getUser().getProfileImageURL() != null){
 			ppt.execute(tweet.getUser().getProfileImageURL());
 		}
+		
+		retweetButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				//TODO: Retweeten!
+				Log.d("Retweet", "nice");
+			}
+		});
+		
+		favoriteButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				//TODO: Favoriten!
+				Log.d("Favorite", "Internet famous!");
+			}
+		});
 		
 		return convertView;
 	}
