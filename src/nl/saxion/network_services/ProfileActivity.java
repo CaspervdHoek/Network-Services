@@ -83,7 +83,7 @@ public class ProfileActivity extends Activity {
 		
 		UserTimelineTask utt = new UserTimelineTask(model, this, listViewTweets, adapter);
 		utt.execute();
-		
+				
 	}
 	
 	public void testFollowerGet(){
