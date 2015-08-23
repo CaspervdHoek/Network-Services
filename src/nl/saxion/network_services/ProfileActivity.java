@@ -76,8 +76,8 @@ public class ProfileActivity extends Activity {
 		testButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
-			public void onClick(View v) {
-				testFollowerGet();				
+			public void onClick(View v) {				
+				testFollowerGet();
 			}
 		});
 		

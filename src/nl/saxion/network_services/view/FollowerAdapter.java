@@ -43,7 +43,7 @@ public class FollowerAdapter extends ArrayAdapter<User> {
 		ProfilePhotoTask ppt = new ProfilePhotoTask(foto);
 		
 		Log.d("TextView emptiness test", Boolean.toString(name == null));
-				
+		
 		name.setText(user.getName());
 		Log.d("User emptiness test2", user.getName());
 		screenName.setText("@" + user.getScreenName());

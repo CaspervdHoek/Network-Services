@@ -88,7 +88,7 @@ public class FollowerListTask extends AsyncTask<String, Double, String> {
 			e.printStackTrace();
 		}
 		
-		adapter = new FollowerAdapter(activity, R.layout.tweet, followerArrayList);
+		adapter = new FollowerAdapter(activity, R.layout.follower, followerArrayList);
 		list.setAdapter(adapter);
 		
 		super.onPostExecute(result);
