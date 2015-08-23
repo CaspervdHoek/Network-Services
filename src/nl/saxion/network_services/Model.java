@@ -18,10 +18,19 @@ public class Model {
 	private static final String OAUTH_CALLBACK_URL = "http://9gag.com";
 	private CommonsHttpOAuthProvider provider;
 	private CommonsHttpOAuthConsumer consumer;
+	private String screenname;
 	
 	public Model(){
 		provider = new CommonsHttpOAuthProvider(OAUTH_REQUEST_URL, OAUTH_ACCESSTOKEN_URL, OAUT_AUTHORIZE_URL);
 		consumer = new CommonsHttpOAuthConsumer(CONSUMER_KEY, CONSUMER_SECRET);
+	}
+	
+	public void setScreenname(String screenname){
+		this.screenname = screenname;
+	}
+	
+	public String getScreenname(){
+		return screenname;
 	}
 	
 	public CommonsHttpOAuthProvider getProvider(){

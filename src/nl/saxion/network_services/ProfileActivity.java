@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import nl.saxion.network_services.view.FollowerAdapter;
 import nl.saxion.network_services.view.TweetAdapter;
 import android.app.Activity;
 import android.content.Intent;
@@ -28,6 +29,7 @@ public class ProfileActivity extends Activity {
 	private MyApplication app;
 	private Model model;
 	private TweetAdapter adapter;
+	private FollowerAdapter followerAdapter;
 	private ImageView profilePhoto;
 	
 	@Override
@@ -85,7 +87,7 @@ public class ProfileActivity extends Activity {
 	}
 	
 	public void testFollowerGet(){
-		FollowerListTask getFollowers = new FollowerListTask(model, this);
+		FollowerListTask getFollowers = new FollowerListTask(model, this, listViewTweets, followerAdapter);
 		getFollowers.execute();
 	}
 	
@@ -102,6 +104,7 @@ public class ProfileActivity extends Activity {
 		this.followers.setText(followers + " followers");
 		this.following.setText(following + " following");
 		this.tweetCount.setText(tweetCount + " tweets");
+		model.setScreenname(userName);
 		
 		ProfilePhotoTask ppt = new ProfilePhotoTask(profilePhoto);
 		ppt.execute(URL);
