@@ -23,7 +23,7 @@ public class ProfileActivity extends Activity {
 	
 	private ListView listViewTweets;
 	private TextView realName, userName, following, followers, tweetCount;
-	private Button homeButton, tweetButton;
+	private Button homeButton, tweetButton, testButton;
 	private EditText editTextTweet;
 	private MyApplication app;
 	private Model model;
@@ -40,6 +40,9 @@ public class ProfileActivity extends Activity {
 		
 		homeButton = (Button) findViewById(R.id.homeButton);
 		tweetButton = (Button) findViewById(R.id.tweetButton);
+		//
+		testButton = (Button) findViewById(R.id.button1);
+		//
 		editTextTweet = (EditText) findViewById(R.id.editTextTweet);
 		listViewTweets = (ListView) findViewById(R.id.listViewTweets);
 		realName = (TextView) findViewById(R.id.realName);
@@ -68,9 +71,22 @@ public class ProfileActivity extends Activity {
 			}
 		});
 		
+		testButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				testFollowerGet();				
+			}
+		});
+		
 		UserTimelineTask utt = new UserTimelineTask(model, this, listViewTweets, adapter);
 		utt.execute();
 		
+	}
+	
+	public void testFollowerGet(){
+		FollowerListTask getFollowers = new FollowerListTask(model, this);
+		getFollowers.execute();
 	}
 	
 	public void updateTweet(String tweet){
